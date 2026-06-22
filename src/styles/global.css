@@ -1,0 +1,31 @@
+@import url("https://fonts.googleapis.com/css2?family=Federo&family=Figtree:ital,wght@0,300..900;1,300..900&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Federo", sans-serif;
+  --font-sans: "Figtree", sans-serif;
+  --bg: rgb(10, 20, 34);
+  --bg-deep: rgb(7, 13, 24);
+  --color-foot: rgb(5, 9, 15);
+  --color-mint: rgb(127, 230, 176);
+  --color-mint-2: rgb(78, 167, 132);
+  --color-medium-purple: rgb(140, 95, 214);
+  --color-gold: rgb(230, 210, 138);
+  --color-cream: rgb(242, 236, 224);
+  --color-stone: rgb(169, 182, 196);
+  --color-stone-dim: rgb(107, 122, 140);
+  --color-ink: rgb(6, 20, 13);
+}
+
+@layer base {
+  body {
+    font-weight: 300;
+  }
+}
+
+.star {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--color-gold);
+  box-shadow: 0 0 4px 0 var(--color-gold);
+}

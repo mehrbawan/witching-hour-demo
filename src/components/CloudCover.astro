@@ -1,0 +1,42 @@
+<div class="track">
+  <div class="set">
+    <img src="/cloudraw.png" />
+    <img src="/cloudraw.png" />
+  </div>
+  <div class="set">
+    <img src="/cloudraw.png" />
+    <img src="/cloudraw.png" />
+  </div>
+</div>
+
+<style>
+  .track {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    display: flex;
+    width: max-content;
+    height: 100%;
+    animation: scroll 60s linear infinite;
+    filter: blur(20px);
+    opacity: 70%;
+    z-index: 7;
+  }
+
+  .set {
+    display: flex;
+    height: 100%;
+  }
+
+  .set img {
+    height: 100%;
+    width: auto;
+    flex-shrink: 0;
+  }
+
+  @keyframes scroll {
+    to {
+        transform: translateX(-50%);
+    }
+}
+</style>

@@ -1,0 +1,28 @@
+---
+const { image = "/cover.jpg", position = "center", flip = false } = Astro.props;
+---
+
+<div class:list={["divider-image", { "divider-image--flip": flip }]}>
+  <img src={image} alt="" style={`object-position: ${position}`} />
+</div>
+
+<style>
+  .divider-image {
+    position: relative;
+    width: 100%;
+    height: clamp(200px, 26vw, 380px);
+    overflow: hidden;
+    clip-path: polygon(0 12%, 100% 0%, 100% 88%, 0% 100%);
+  }
+
+  .divider-image--flip {
+    clip-path: polygon(0 0%, 100% 12%, 100% 100%, 0% 88%);
+  }
+
+  .divider-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+</style>
