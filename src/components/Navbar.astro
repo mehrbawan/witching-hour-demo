@@ -4,12 +4,9 @@ const leftLinks = [
   { label: "Grimoire", href: "/grimoire" },
 ];
 
-const rightLinks = [
-  { label: "Blog", href: "/blog" },
-  { label: "Buy Now", href: "/buy" },
-];
+const rightLinks = [{ label: "Blog", href: "/blog" }];
 
-const allLinks = [...leftLinks, ...rightLinks];
+const buyLink = { label: "Buy Now", href: "/buy" };
 ---
 
 <nav class="fixed inset-x-0 top-0 z-50 bg-linear-to-b from-slate-950/80 from-10% via-slate-950/20 via-60% to-slate-950/0 to-90% text-stone font-display px-12 py-6 tracking-[0.2em]">
@@ -27,7 +24,8 @@ const allLinks = [...leftLinks, ...rightLinks];
     </ul>
 
     <a href="/" class="flex shrink-0 items-center md:flex-none">
-      <img src="/wordmark.png" alt="Witching Hour" class="h-8 w-auto" />
+      <!-- <img src="/wordmark.png" alt="Witching Hour" class="h-8 w-auto" /> -->
+       <span class="text-lg">◇</span><span class="text-xl">♢</span><span class="text-lg">◇</span>
     </a>
 
     <ul class="hidden flex-1 items-center justify-end gap-8 md:flex">
@@ -40,6 +38,14 @@ const allLinks = [...leftLinks, ...rightLinks];
           </li>
         ))
       }
+      <li>
+        <a
+          href={buyLink.href}
+          class="inline-flex items-center justify-center py-2.5 px-6 rounded-xs text-sm font-medium uppercase text-stone ring-1 ring-inset ring-mint/20 transition-colors duration-200 hover:text-cream hover:bg-mint/5 hover:ring-mint/55"
+        >
+          {buyLink.label}
+        </a>
+      </li>
     </ul>
 
     <label
@@ -55,9 +61,9 @@ const allLinks = [...leftLinks, ...rightLinks];
 
   <input type="checkbox" id="nav-toggle" class="peer hidden" />
 
-  <ul class="hidden flex-col items-center gap-4 border-t border-white/10 bg-slate-950/50 px-4 py-4 peer-checked:flex md:hidden">
+  <ul class="hidden flex-col items-center gap-4 border-t border-white/10 bg-slate-950/75 px-4 py-4 peer-checked:flex md:hidden">
     {
-      allLinks.map((link) => (
+      [...leftLinks, ...rightLinks].map((link) => (
         <li>
           <a href={link.href} class="text-sm font-medium uppercase hover:text-white/70">
             {link.label}
@@ -65,5 +71,13 @@ const allLinks = [...leftLinks, ...rightLinks];
         </li>
       ))
     }
+    <li>
+      <a
+        href={buyLink.href}
+        class="inline-flex items-center justify-center py-2.5 px-6 rounded-xs text-sm font-medium uppercase text-stone transition-colors duration-200"
+      >
+        {buyLink.label}
+      </a>
+    </li>
   </ul>
 </nav>

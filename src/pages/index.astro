@@ -1,250 +1,191 @@
 ---
-import "../styles/global.css";
-import Navbar from "../components/Navbar.astro";
+import Layout from "../layouts/Layout.astro";
 import ResourceCard from "../components/ResourceCard.astro";
 import ImageDivider from "../components/ImageDivider.astro";
 import CloudCover from "../components/CloudCover.astro";
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Federo&family=Figtree:ital,wght@0,300..900;1,300..900&display=swap"
-      rel="stylesheet"
+<Layout>
+  <header
+    class="relative overflow-clip h-screen w-full bg-linear-to-b from-slate-700 from-10% via-indigo-400 via-80 to-teal-900 z-10"
+  >
+    <div
+      class="invisible moon z-0 w-75 h-75 rounded-full absolute bg-white blur-sm top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 md:left-3/4 md:visible"
+    >
+    </div>
+    <div
+      class="starfield absolute inset-0 z-[10] overflow-hidden pointer-events-none opacity-70"
+      id="starfield"
+    >
+    </div>
+    <CloudCover />
+    <img
+      src="/tree.jpg"
+      class="absolute top-0 left-0 w-full h-full object-cover mix-blend-multiply z-10 opacity-70"
     />
-    <title>Astro</title>
-  </head>
-  <body class="bg-[#0A1422] font-sans">
-    <Navbar />
-    <main>
-      <header
-        class="relative overflow-clip h-screen w-full bg-linear-to-b from-slate-700 from-10% via-indigo-400 via-80 to-teal-900 z-10"
-      >
-        <div
-          class="moon z-0 w-75 h-75 rounded-full absolute bg-white blur-sm top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 md:left-3/4"
+    <div
+      class="relative z-20 flex flex-row justify-start h-full w-full items-center p-10 md:p:20 lg:p-30 font-sans"
+      id="top"
+      data-screen-label="Hero"
+    >
+      <div class="flex flex-col gap-3 w-full md:w-3/5 lg:w-2/4 text-stone">
+        <img src="/wordmark.png" class="max-w-xl" />
+        <h1 class="font-display uppercase tracking-[0.3em] text-xl text-mint">
+          A Folk-Horror <span class="text-yellow-600">Conspiracy</span> TTRPG
+        </h1>
+        <span class="text-sm md:text-lg w-4/5"
+          >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nocte
+          ineunt umbrae - the streets remember what the daylight forgets.</span
         >
-        </div>
-        <div
-          class="starfield absolute inset-0 z-[10] overflow-hidden pointer-events-none opacity-70"
-          id="starfield"
-        >
-        </div>
-        <CloudCover />
-        <img
-          src="/tree.jpg"
-          class="absolute top-0 left-0 w-full h-full object-cover mix-blend-multiply z-10 opacity-70"
-        />
-        <div
-          class="relative z-20 flex flex-row justify-start h-full w-full items-center p-10 md:p:20 lg:p-30 font-sans"
-          id="top"
-          data-screen-label="Hero"
-        >
-          <div class="flex flex-col gap-3 w-full md:w-3/5 lg:w-2/4 text-stone">
-            <img src="/wordmark.png" />
-            <h1
-              class="font-display uppercase tracking-[0.3em] text-xl text-mint"
-            >
-              A Folk-Horror <span class="text-yellow-600">Conspiracy</span> TTRPG
-            </h1>
-            <span class="text-lg w-4/5"
-              >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-              nocte ineunt umbrae - the streets remember what the daylight
-              forgets.</span
-            >
-            <div class="hero-buttons">
-              <button
-                class="group bg-mint py-4 px-8 font-display uppercase tracking-[0.3em] text-slate-900 rounded-xs shadow-md/70 shadow-mint hover:shadow-lg/70 hover:shadow-mint hover:brightness-105 hover:-translate-y-0.5 transition-all duration-200"
-                >Dive In <span class="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span></button
-              >
-              <button
-                class="bg-violet-500/20 border-1 border-violet-500/70 rounded-xs py-4 px-8 font-display uppercase tracking-[0.3em] text-white rounded-sm hover:border-violet-500 hover:bg-violet-500/30 transition-all duration-[250ms]"
-                >Read the Lore</button
-              >
-            </div>
-          </div>
-        </div>
-      </header>
-      <section
-        class="intro flex flex-col justify-center items-center text-white"
-      >
-        <div
-          class="flex flex-col gap-10 py-30 px-10 md:w-4/5 justify-center items-center text-center bg-radial-[at_50%_-200%] from-purple-400 via-slate-900/100 via-60% to-indigo-900/0 to-90% text-stone-dim"
-        >
-          - ❖ -
-          <span
-            class="kicker font-display text-xs tracking-[0.3em] uppercase text-mint"
-            >THE GAME</span
+        <div class="hero-buttons flex flex-col md:flex-row gap-5">
+          <button
+            class="text-base group bg-mint py-4 px-8 font-display uppercase tracking-[0.3em] text-slate-900 rounded-xs shadow-md/70 shadow-mint hover:shadow-lg/70 hover:shadow-mint hover:brightness-105 hover:-translate-y-0.5 transition-all duration-200"
+            >Dive In <span
+              class="inline-block transition-transform duration-200 group-hover:translate-x-1"
+              >→</span
+            ></button
           >
-          <h2 class="font-display text-4xl md:text-7xl text-white">
-            Lorem ipsum dolor sit amet <span class="text-mint">noctis</span>
-          </h2>
-          <div class="w-3/5">
-            <p>
-              Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-              accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-              quae ab illo inventore veritatis et quasi architecto beatae vitae
-              dicta sunt explicabo.
-            </p>
-          </div>
-          <a
-            ><span class="font-display text-xs tracking-[0.3em] text-mint"
-              >READ MORE →</span
-            ></a
+          <button
+            class="text-base bg-violet-500/10 border-1 border-violet-500/70 rounded-xs py-4 px-8 font-display uppercase tracking-[0.3em] text-white rounded-sm hover:border-violet-500 hover:bg-violet-500/30 transition-all duration-[250ms]"
+            >Read the Lore</button
           >
         </div>
-      </section>
-      <ImageDivider image="/cover.jpg" position="30% 40%" />
-      <section
-        class="resources flex flex-col justify-center items-center text-stone-dim"
+      </div>
+    </div>
+  </header>
+  <main>
+    <section class="fade-in intro flex flex-col justify-center items-center text-white">
+      <div
+        class="flex flex-col gap-10 py-30 px-10 md:w-4/5 justify-center items-center text-center bg-radial-[at_50%_-200%] from-purple-400 via-slate-900/100 via-60% to-indigo-900/0 to-90% text-stone-dim"
       >
-        <div
-          class="flex flex-col gap-10 py-30 px-10 md:w-4/5 justify-center items-center text-center"
+        - ❖ -
+        <span
+          class="kicker font-display text-xs tracking-[0.3em] uppercase text-mint"
+          >THE GAME</span
         >
-          <span
-            class="kicker font-display text-xs tracking-[0.3em] uppercase text-mint"
-            >OPEN THE GRIMOIRE</span
-          >
-          <h2 class="font-display text-4xl md:text-6xl text-white">
-            Everything you need to play
-          </h2>
-          <div class="w-3/5">
-            <p>
-              Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-              accusantium doloremque laudantium.
-            </p>
-          </div>
-          <div class="card-holder flex flex-col md:flex-row gap-10 w-5/6">
-            <ResourceCard title="Rules" />
-            <ResourceCard title="Character Sheets" />
-            <ResourceCard title="Stats" />
-          </div>
+        <h2 class="font-display text-4xl md:text-7xl text-white">
+          Lorem ipsum dolor sit amet <span class="text-mint">noctis</span>
+        </h2>
+        <div class="text-sm md:text-base w-full md:w-3/5">
+          <p>
+            Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+            accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
+            quae ab illo inventore veritatis et quasi architecto beatae vitae
+            dicta sunt explicabo.
+          </p>
         </div>
-      </section>
-      <ImageDivider image="/cover.jpg" position="70% 60%" flip />
-      <section
-        class="wishlist flex flex-col justify-center items-center text-white"
-      >
-        <div
-          class="flex flex-col gap-10 py-20 px-10 md:w-4/5 justify-center items-center text-center bg-radial-[at_50%_300%] from-teal-400 via-slate-900/60 via-60% to-slate-900/0 to-90% text-stone-dim"
+        <a
+          ><span class="font-display text-xs tracking-[0.3em] text-mint"
+            >READ MORE →</span
+          ></a
         >
-          - ❖ -
-          <!-- <span
-            class="kicker font-display text-xs tracking-[0.3em] uppercase text-mint"
-            >ENTER THE FRAY</span
-          > -->
-          <h2 class="font-display text-4xl md:text-6xl text-white">
-            Be there when the <span class="text-yellow-600">clock strikes</span>
-          </h2>
-          <div class="w-3/5">
-            <p>
-              Quia voluptas sit aspernatur aut odit aut fugit - join the coven
-              and be first through the door.
-            </p>
-          </div>
-          <form
-            class="wishlist-form flex flex-col md:flex-row gap-5"
-            onsubmit="return false;"
+      </div>
+    </section>
+    <ImageDivider image="/cover.jpg" position="30% 40%" />
+    <section
+      class="fade-in resources flex flex-col justify-center items-center text-stone-dim"
+    >
+      <div
+        class="flex flex-col gap-10 py-30 px-10 md:w-4/5 justify-center items-center text-center"
+      >
+        <span
+          class="kicker font-display text-xs tracking-[0.3em] uppercase text-mint"
+          >OPEN THE GRIMOIRE</span
+        >
+        <h2 class="font-display text-4xl md:text-6xl text-white">
+          Everything you need to play
+        </h2>
+        <div class="text-sm md:text-base w-4/5 md:w-3/5">
+          <p>
+            Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+            accusantium doloremque laudantium.
+          </p>
+        </div>
+        <div class="card-holder flex flex-col md:flex-row gap-10 w-5/6">
+          <ResourceCard title="Rules" />
+          <ResourceCard title="Character Sheets" />
+          <ResourceCard title="Stats" />
+        </div>
+      </div>
+    </section>
+    <ImageDivider image="/cover.jpg" position="70% 60%" flip />
+    <section
+      class="fade-in wishlist flex flex-col justify-center items-center text-white"
+    >
+      <div
+        class="flex flex-col gap-10 py-20 px-10 md:w-4/5 justify-center items-center text-center bg-radial-[at_50%_300%] from-teal-400 via-slate-900/60 via-60% to-slate-900/0 to-90% text-stone-dim"
+      >
+        - ❖ -
+        <!-- <span
+              class="kicker font-display text-xs tracking-[0.3em] uppercase text-mint"
+              >ENTER THE FRAY</span
+            > -->
+        <h2 class="font-display text-4xl md:text-6xl text-white">
+          Be there when the <span class="text-yellow-600">clock strikes</span>
+        </h2>
+        <div class="text-sm md:text-base w-full md:w-3/5">
+          <p>
+            Quia voluptas sit aspernatur aut odit aut fugit - join the coven and
+            be first through the door.
+          </p>
+        </div>
+        <form
+          class="wishlist-form flex flex-col md:flex-row gap-5"
+          onsubmit="return false;"
+        >
+          <input
+            class="py-4 px-15 border-1 border-stone-mid rounded-xs"
+            type="email"
+            placeholder="your@witching.email"
+            aria-label="Email address"
+          />
+          <button
+            class="text-sm md:text-base group bg-mint py-4 px-10 font-display uppercase tracking-[0.3em] text-slate-900 rounded-xs shadow-md/70 shadow-mint hover:shadow-lg/70 hover:shadow-mint hover:brightness-105 hover:-translate-y-0.5 transition-all duration-200"
+            type="submit"
+            >Enter the Hour<span
+              class="inline-block transition-transform duration-200 group-hover:translate-x-1"
+              >→</span
+            ></button
           >
-            <input
-              class="py-4 px-15 border-1 border-stone-mid rounded-xs"
-              type="email"
-              placeholder="your@witching.email"
-              aria-label="Email address"
-            />
-            <button
-              class="group bg-mint py-4 px-10 font-display uppercase tracking-[0.3em] text-slate-900 rounded-xs shadow-md/70 shadow-mint hover:shadow-lg/70 hover:shadow-mint hover:brightness-105 hover:-translate-y-0.5 transition-all duration-200"
-              type="submit">Dive In <span class="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span></button
-            >
-          </form>
+        </form>
 
-          <span class="kicker font-display text-xs tracking-[0.3em] uppercase"
-            >No Spam, only Signals</span
-          >
-        </div>
-      </section>
-      <footer
-        class="flex flex-col justify-between items-center bg-foot p-10 md:px-30 md:py-20 gap-20 text-stone-dim"
-      >
-        <div
-          class="footer-content flex flex-col md:flex-row justify-between items-start md:items-center"
+        <span class="kicker font-display text-xs tracking-[0.3em] uppercase"
+          >No Spam, only Signals</span
         >
-          <div class="branding flex-col w-full p-5 md:w-3/10">
-            <img src="/wordmark.png" class="w-2/5" />
-            <span class="text-s"
-              >A folk-horror conspiracy TTRPG. Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit sed do eiusmod.</span
-            >
-          </div>
-          <div
-            class="links flex flex-col md:flex-row gap-5 med:gap-20 text-xs w-full md:w-2/5 justify-between"
-          >
-            <div class="game-links flex flex-col gap-3">
-              <span class="font-display uppercase text-mint tracking-[0.3em]"
-                >THE GAME</span
-              >
-              <ul class="flex flex-col gap-2">
-                <li>Overview</li>
-                <li>Rules</li>
-                <li>Character Sheets</li>
-                <li>Stats</li>
-              </ul>
-            </div>
-            <div class="game-links flex flex-col gap-3">
-              <span class="font-display uppercase text-mint tracking-[0.3em]"
-                >THE GAME</span
-              >
-              <ul class="flex flex-col gap-2">
-                <li>Overview</li>
-                <li>Rules</li>
-                <li>Character Sheets</li>
-                <li>Stats</li>
-              </ul>
-            </div>
-            <div class="game-links flex flex-col gap-3">
-              <span class="font-display uppercase text-mint tracking-[0.3em]"
-                >THE GAME</span
-              >
-              <ul class="flex flex-col gap-2">
-                <li>Overview</li>
-                <li>Rules</li>
-                <li>Character Sheets</li>
-                <li>Stats</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="footer-end flex flex-row justify-between w-full text-xs">
-          <span>© 2026 Witching Hour. All rights reserved.</span>
-          <span>Copyright & Trademark  |  Privacy Policy</span>
-        </div>
-      </footer>
-      <style>
-        body {
-          margin: 0;
-        }
-      </style>
-      <script>
-        const field = document.getElementById("starfield");
-        if (field) {
-          const STAR_COUNT = 90;
-          let html = "";
-          for (let i = 0; i < STAR_COUNT; i++) {
-            const x = Math.random() * 100;
-            const y = Math.random() * 70;
-            const s = (Math.random() * 1.4 + 1).toFixed(2);
-            const o = (Math.random() * 0.6 + 0.4).toFixed(2);
-            html += `<span class="star" style="left:${x}%;top:${y}%;width:${s}px;height:${s}px;opacity:${o}"></span>`;
-          }
-          field.innerHTML = html;
-        }
-      </script>
-    </main>
-  </body>
-</html>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<script>
+  const field = document.getElementById("starfield");
+  if (field) {
+    const STAR_COUNT = 80;
+    let html = "";
+    for (let i = 0; i < STAR_COUNT; i++) {
+      const x = Math.random() * 100;
+      const y = Math.random() * 70;
+      const s = (Math.random() * 2 + 1).toFixed(2);
+      const o = (Math.random() * 1 + 0.4).toFixed(2);
+      html += `<span class="star" style="left:${x}%;top:${y}%;width:${s}px;height:${s}px;opacity:${o}"></span>`;
+    }
+    field.innerHTML = html;
+  }
+</script>
+<script>
+  const observerOptions = {
+    threshold: 0.2,
+    rootMargin: "0px 0px -50px 0px",
+  };
+  const observer = new IntersectionObserver(function (entries) {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('section').forEach((element) => {
+    observer.observe(element);
+  });
+</script>
