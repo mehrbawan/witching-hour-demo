@@ -1,0 +1,170 @@
+---
+import { Image } from "astro:assets";
+import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+import PostCard from "../../components/PostCard.astro"
+import MainActionButton from "../../components/MainActionButton.astro";
+
+
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+const allTags = [...new Set(posts.flatMap((post) => post.data.tags))].sort();
+
+const [featured, ...rest] = posts;
+const featuredWords =
+  featured?.body?.trim().split(/\s+/).filter(Boolean).length ?? 0;
+const featuredReadTime = Math.max(1, Math.round(featuredWords / 200));
+---
+
+<Layout>
+  <main>
+    <div
+      class="starfield absolute inset-0 z-[10] overflow-hidden pointer-events-none opacity-70"
+      id="starfield"
+    >
+    </div>
+    <div
+      class="relative flex flex-row justify-center h-full w-full items-center pt-30 pb-10 font-sans text-center"
+    >
+      <div
+        class="text-white flex flex-col gap-5 w-4/5 items-center justify-start"
+      >
+        <header class="flex flex-col items-center justify-start w-full md:w-4/5 gap-5">
+          <span
+            class="kicker font-display text-xs tracking-[0.3em] uppercase text-mint"
+            >OFFICIAL BLOG</span
+          >
+          <h1 class="font-display text-4xl md:text-6xl text-white">
+            Dispatches from the World of <span class="text-gold"
+              >Witching Hour</span
+            >
+          </h1>
+          <span class="text-stone"
+            >Dev diaries, world lore, and field notes from the team behind the
+            magic.</span
+          >
+
+          <!-- render tags -->
+
+          <ul class="flex flex-wrap gap-3 justify-center">
+            <li>
+              <span
+                class="font-display text-xs uppercase tracking-[0.2em] text-mint py-1 px-3 md:py-2 md:px-5 bg-mint text-slate-900 rounded-xs"
+              >
+                all
+              </span>
+            </li>
+            {
+              allTags.map((tag) => (
+                <li>
+                  <a
+                    href={`/tags/${tag}`}
+                    class="font-display text-xs uppercase tracking-[0.2em] text-stone border-[1px] py-1 px-3 md:py-2 md:px-5 border-stone-dim rounded-xs hover:text-white hover:border-mint transition-all duration-200"
+                  >
+                    {tag}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </header>
+
+        <!-- featured post component  -->
+
+        {
+          featured && (
+            <div class="featured-holder w-full">
+              <article class="featured-article grid grid-cols-1 md:grid-cols-[1.15fr_1fr] w-full text-left rounded-lg overflow-hidden shadow-[inset_0_0_0_1px_rgba(127,230,176,0.18),0_30px_70px_-34px_rgba(0,0,0,0.9)] bg-gradient-to-b from-slate-800/60 to-slate-900/60">
+                <div class="thumb relative min-h-[280px] md:min-h-[420px] bg-gradient-to-br from-medium-purple/60 via-slate-900/30 to-slate-950/90 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.12)] overflow-hidden">
+                  {featured.data.heroImage && (
+                    <Image
+                      width={480}
+                      height={360}
+                      src={featured.data.heroImage}
+                      alt=""
+                      class="absolute inset-0 w-full h-full object-cover"
+                    />
+                  )}
+                  {featured.data.tags[0] && (
+                    <span class="tag absolute left-4 top-4 z-10 font-display text-[11px] uppercase tracking-[0.2em] text-cream bg-ink/55 backdrop-blur-sm py-1.5 px-3 rounded-xs shadow-[inset_0_0_0_1px_rgba(127,230,176,0.3)]">
+                      {featured.data.tags[0]}
+                    </span>
+                  )}
+                  <span class="mark absolute right-4 bottom-3.5 z-10 font-display text-lg text-white/30">
+                    &#10022;
+                  </span>
+                </div>
+                <div class="featured-body p-8 md:p-12 flex flex-col justify-center gap-4">
+                  <p class="featured-kicker font-display text-xs uppercase tracking-[0.3em] text-mint">
+                    Featured
+                  </p>
+                  <h2 class="font-display text-2xl md:text-4xl text-cream">
+                    <a
+                      href={`/blog/${featured.id}/`}
+                      class="hover:text-mint transition-colors duration-200"
+                    >
+                      {featured.data.title}
+                    </a>
+                  </h2>
+                  <p class="text-stone text-sm md:text-base">
+                    {featured.data.description}
+                  </p>
+                  <div class="meta flex flex-wrap items-center gap-3 text-xs text-stone-dim font-sans">
+                    {featured.data.author && (
+                      <span class="author text-stone">{featured.data.author}</span>
+                    )}
+                    <span class="sep text-medium-purple text-[9px]">&#9670;</span>
+                    <span>
+                      {featured.data.pubDate.toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })}
+                    </span>
+                    <span class="sep text-medium-purple text-[9px]">&#9670;</span>
+                    <span>{featuredReadTime} min read</span>
+                  </div>
+                </div>
+              </article>
+            </div>
+          )
+        }
+
+          <span
+            class="kicker font-display text-xs tracking-[0.3em] uppercase text-mint p-10 pt-20"
+            >Latest Posts</span
+          >
+        <!-- recent posts cards -->
+        <ul class="flex flex-wrap gap-8 justify-center">
+          {
+            (rest.slice(0,3)).map((post) => (
+              <li class="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.35rem)]">
+                <PostCard post={post} />
+              </li>
+            ))
+          }
+        </ul>
+<a href="/blog/2">
+  <MainActionButton text={"See Older Posts"} />
+</a>
+      </div>
+    </div>
+  </main>
+</Layout>
+<script>
+  const field = document.getElementById("starfield");
+  if (field) {
+    const STAR_COUNT = 50;
+    let html = "";
+    for (let i = 0; i < STAR_COUNT; i++) {
+      const x = Math.random() * 100;
+      const y = Math.random() * 70;
+      const s = (Math.random() * 0.75 + 1).toFixed(2);
+      const o = (Math.random() * 1 + 0.4).toFixed(2);
+      html += `<span class="star" style="left:${x}%;top:${y}%;width:${s}px;height:${s}px;opacity:${o}"></span>`;
+    }
+    field.innerHTML = html;
+  }
+</script>

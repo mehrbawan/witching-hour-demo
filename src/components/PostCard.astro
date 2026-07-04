@@ -1,0 +1,71 @@
+---
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  post: CollectionEntry<"blog">;
+}
+
+const { post } = Astro.props;
+---
+
+<div class="post-holder w-full">
+  <article
+    class="post-article flex flex-col w-full min-h-[250px] text-left bg-slate-900/40"
+  >
+    <div
+      class="thumb relative w-full min-h-[220px] h-3/5 flex items-start justify-between p-5 bg-gradient-to-br from-medium-purple to-deep-purple overflow-hidden"
+    >
+      {
+        post.data.heroImage && (
+          <Image
+            width={480}
+            height={360}
+            src={post.data.heroImage}
+            alt=""
+            class="absolute inset-0 w-full h-full object-cover"
+          />
+        )
+      }
+      {
+        post.data.tags[0] && (
+          <span class="font-display text-xs uppercase tracking-[0.2em] bg-ink/70 text-stone border-[1px] py-1 px-3 md:py-2 md:px-5 border-stone-dim rounded-xs hover:text-white hover:border-mint transition-all duration-200">
+            {post.data.tags[0]}
+          </span>
+        )
+      }
+    </div>
+    <div class="post-body p-8 md:p-10 flex flex-col gap-4 justify-center">
+      <h2 class="font-display text-2xl md:text-3xl text-white">
+        <a
+          href={`/blog/${post.id}/`}
+          class="hover:text-gold transition-colors duration-200"
+        >
+          {post.data.title}
+        </a>
+      </h2>
+      <p class="text-stone text-sm md:text-base">
+        {post.data.description}
+      </p>
+      <div
+        class="meta flex flex-wrap items-center gap-3 text-xs uppercase tracking-wide text-stone-dim font-display"
+      >
+        {
+          post.data.author && (
+            <span class="author">{post.data.author}</span>
+          )
+        }
+        <span class="sep text-mint">&#9670;</span>
+        <span>
+          {
+            post.data.pubDate.toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })
+          }
+        </span>
+      </div>
+    </div>
+  </article>
+</div>

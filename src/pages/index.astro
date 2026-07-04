@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import ResourceCard from "../components/ResourceCard.astro";
 import ImageDivider from "../components/ImageDivider.astro";
 import CloudCover from "../components/CloudCover.astro";
+import MainActionButton from "../components/MainActionButton.astro";
 ---
 
 <Layout>
@@ -31,22 +32,16 @@ import CloudCover from "../components/CloudCover.astro";
       <div class="flex flex-col gap-3 w-full md:w-3/5 lg:w-2/4 text-stone">
         <img src="/wordmark.png" class="max-w-xl" />
         <h1 class="font-display uppercase tracking-[0.3em] text-xl text-mint">
-          A Folk-Horror <span class="text-yellow-600">Conspiracy</span> TTRPG
+          A Folk-Horror <span class="text-gold">Conspiracy</span> TTRPG
         </h1>
         <span class="text-sm md:text-lg w-4/5"
           >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nocte
           ineunt umbrae - the streets remember what the daylight forgets.</span
         >
         <div class="hero-buttons flex flex-col md:flex-row gap-5">
+            <MainActionButton text={"Dive In"} />
           <button
-            class="text-base group bg-mint py-4 px-8 font-display uppercase tracking-[0.3em] text-slate-900 rounded-xs shadow-md/70 shadow-mint hover:shadow-lg/70 hover:shadow-mint hover:brightness-105 hover:-translate-y-0.5 transition-all duration-200"
-            >Dive In <span
-              class="inline-block transition-transform duration-200 group-hover:translate-x-1"
-              >→</span
-            ></button
-          >
-          <button
-            class="text-base bg-violet-500/10 border-1 border-violet-500/70 rounded-xs py-4 px-8 font-display uppercase tracking-[0.3em] text-white rounded-sm hover:border-violet-500 hover:bg-violet-500/30 transition-all duration-[250ms]"
+            class="text-base bg-violet-500/10 border-1 border-violet-500/70 rounded-xs py-4 px-8 font-display uppercase tracking-[0.3em] text-white rounded-sm hover:border-violet-500 hover:bg-violet-500/20 transition-all duration-[250ms]"
             >Read the Lore</button
           >
         </div>
@@ -58,13 +53,13 @@ import CloudCover from "../components/CloudCover.astro";
       <div
         class="flex flex-col gap-10 py-30 px-10 md:w-4/5 justify-center items-center text-center bg-radial-[at_50%_-200%] from-purple-400 via-slate-900/100 via-60% to-indigo-900/0 to-90% text-stone-dim"
       >
-        - ❖ -
+        - ◇ -
         <span
           class="kicker font-display text-xs tracking-[0.3em] uppercase text-mint"
           >THE GAME</span
         >
         <h2 class="font-display text-4xl md:text-7xl text-white">
-          Lorem ipsum dolor sit amet <span class="text-mint">noctis</span>
+          Lorem ipsum dolor sit amet <span class="text-gold">noctis</span>
         </h2>
         <div class="text-sm md:text-base w-full md:w-3/5">
           <p>
@@ -115,13 +110,13 @@ import CloudCover from "../components/CloudCover.astro";
       <div
         class="flex flex-col gap-10 py-20 px-10 md:w-4/5 justify-center items-center text-center bg-radial-[at_50%_300%] from-teal-400 via-slate-900/60 via-60% to-slate-900/0 to-90% text-stone-dim"
       >
-        - ❖ -
+        - ◇ -
         <!-- <span
               class="kicker font-display text-xs tracking-[0.3em] uppercase text-mint"
               >ENTER THE FRAY</span
             > -->
         <h2 class="font-display text-4xl md:text-6xl text-white">
-          Be there when the <span class="text-yellow-600">clock strikes</span>
+          Be there when the <span class="text-gold">clock strikes</span>
         </h2>
         <div class="text-sm md:text-base w-full md:w-3/5">
           <p>
@@ -139,14 +134,15 @@ import CloudCover from "../components/CloudCover.astro";
             placeholder="your@witching.email"
             aria-label="Email address"
           />
-          <button
-            class="text-sm md:text-base group bg-mint py-4 px-10 font-display uppercase tracking-[0.3em] text-slate-900 rounded-xs shadow-md/70 shadow-mint hover:shadow-lg/70 hover:shadow-mint hover:brightness-105 hover:-translate-y-0.5 transition-all duration-200"
+          <!-- <button
+            class="text-base group bg-mint py-4 px-8 font-display uppercase tracking-[0.3em] text-slate-900 rounded-xs shadow-md/70 shadow-mint hover:shadow-lg/70 hover:shadow-mint hover:brightness-105 hover:-translate-y-0.5 transition-all duration-200"
             type="submit"
             >Enter the Hour<span
               class="inline-block transition-transform duration-200 group-hover:translate-x-1"
               >→</span
             ></button
-          >
+          > -->
+            <MainActionButton text={"Enter the Hour"} />
         </form>
 
         <span class="kicker font-display text-xs tracking-[0.3em] uppercase"

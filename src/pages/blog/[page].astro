@@ -1,0 +1,78 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import PostCard from "../../components/PostCard.astro";
+import { getCollection } from "astro:content";
+import type { GetStaticPaths, Page } from "astro";
+import type { CollectionEntry } from "astro:content";
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const posts = (await getCollection("blog")).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+  );
+
+  return paginate(posts, { pageSize: 3 }).slice(1);
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props as { page: Page<CollectionEntry<"blog">> };
+
+// page 1 lives at /blog, not /blog/1, since that route was skipped above
+const prevHref = page.currentPage === 2 ? "/blog" : page.url.prev;
+---
+
+<Layout>
+  <main>
+    <div
+      class="relative flex flex-row justify-center h-full w-full items-center pt-30 pb-20 font-sans text-center"
+    >
+      <div
+        class="text-white flex flex-col gap-10 w-4/5 items-center justify-start"
+      >
+        <header class="flex flex-col items-center justify-start w-full md:w-4/5 gap-5">
+          <span
+            class="kicker font-display text-xs tracking-[0.3em] uppercase text-mint"
+            >OFFICIAL BLOG</span
+          >
+          <h1 class="font-display text-4xl md:text-6xl text-white">
+            Page <span class="text-gold">{page.currentPage}</span>
+          </h1>
+        </header>
+
+        <ul class="flex flex-wrap gap-8 justify-center">
+          {
+            page.data.map((post) => (
+              <li class="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.35rem)]">
+                <PostCard post={post} />
+              </li>
+            ))
+          }
+        </ul>
+
+        <nav class="flex items-center gap-4 font-display text-xs uppercase tracking-[0.2em]">
+          {
+            prevHref && (
+              <a
+                href={prevHref}
+                class="text-stone border-[1px] py-2 px-5 border-stone-dim rounded-xs hover:text-white hover:border-mint transition-all duration-200"
+              >
+                &larr; Prev
+              </a>
+            )
+          }
+          <span class="text-stone-dim">
+            Page {page.currentPage} of {page.lastPage}
+          </span>
+          {
+            page.url.next && (
+              <a
+                href={page.url.next}
+                class="text-stone border-[1px] py-2 px-5 border-stone-dim rounded-xs hover:text-white hover:border-mint transition-all duration-200"
+              >
+                Next &rarr;
+              </a>
+            )
+          }
+        </nav>
+      </div>
+    </div>
+  </main>
+</Layout>
