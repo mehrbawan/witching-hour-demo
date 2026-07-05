@@ -1,4 +1,56 @@
 ---
+import Layout from "../../layouts/Layout.astro";
+import PostCard from "../../components/PostCard.astro";
+import { getCollection } from "astro:content";
+import type { GetStaticPaths } from "astro";
+import type { CollectionEntry } from "astro:content";
 
+export const getStaticPaths = (async () => {
+  const posts = await getCollection("blog");
+  const allTags = [...new Set(posts.flatMap((post) => post.data.tags))];
+
+  return allTags.map((tag) => ({
+    params: { tag },
+    props: {
+      posts: posts
+        .filter((post) => post.data.tags.includes(tag))
+        .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()),
+    },
+  }));
+}) satisfies GetStaticPaths;
+
+const { tag } = Astro.params;
+const { posts } = Astro.props as { posts: CollectionEntry<"blog">[] };
 ---
 
+<Layout>
+  <main>
+    <div
+      class="relative flex flex-row justify-center h-full w-full items-center pt-30 pb-20 font-sans text-center"
+    >
+      <div
+        class="text-white flex flex-col gap-10 w-4/5 items-center justify-start"
+      >
+        <header class="flex flex-col items-center justify-start w-full md:w-4/5 gap-5">
+          <span
+            class="kicker font-display text-xs tracking-[0.3em] uppercase text-mint"
+            >TAGGED</span
+          >
+          <h1 class="font-display text-4xl md:text-6xl text-white capitalize">
+            <span class="">{tag}</span>
+          </h1>
+        </header>
+
+        <ul class="flex flex-wrap gap-8 justify-center">
+          {
+            posts.map((post) => (
+              <li class="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.35rem)]">
+                <PostCard post={post} />
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </main>
+</Layout>
