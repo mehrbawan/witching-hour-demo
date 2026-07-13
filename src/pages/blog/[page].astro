@@ -10,7 +10,7 @@ export const getStaticPaths = (async ({ paginate }) => {
     (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
   );
 
-  return paginate(posts, { pageSize: 3 }).slice(1);
+  return paginate(posts, { pageSize: 6 });
 }) satisfies GetStaticPaths;
 
 const { page } = Astro.props as { page: Page<CollectionEntry<"blog">> };
@@ -37,11 +37,11 @@ const prevHref = page.currentPage === 2 ? "/blog" : page.url.prev;
           </h1>
         </header>
 
-        <ul class="flex flex-wrap gap-8 justify-center">
+        <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
           {
             page.data.map((post) => (
-              <li class="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.35rem)]">
-                <PostCard post={post} />
+              <li>
+                <PostCard post={post} tagOn={false} />
               </li>
             ))
           }

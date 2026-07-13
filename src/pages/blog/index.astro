@@ -137,17 +137,17 @@ const featuredReadTime = Math.max(1, Math.round(featuredWords / 200));
             >Latest Posts</span
           >
         <!-- recent posts cards -->
-        <ul class="flex flex-wrap gap-8 justify-center">
+        <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
           {
             (rest.slice(0,3)).map((post) => (
-              <li class="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.35rem)]">
-                <PostCard post={post} />
+              <li>
+                <PostCard post={post} tagOn={false} />
               </li>
             ))
           }
         </ul>
-<a href="/blog/2">
-  <MainActionButton text={"See Older Posts"} />
+<a href="/blog/1">
+  <MainActionButton text={"See All Posts"} />
 </a>
       </div>
     </div>

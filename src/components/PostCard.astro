@@ -4,12 +4,15 @@ import type { CollectionEntry } from "astro:content";
 
 interface Props {
   post: CollectionEntry<"blog">;
+  tagOn: boolean;
 }
 
-const { post } = Astro.props;
+const { post, tagOn=true } = Astro.props;
 ---
 
-<div class="post-holder w-full">
+<div
+  class="post-holder w-full shadow-[inset_0_0_0_1px_rgba(127,230,176,0.18),0_30px_70px_-34px_rgba(0,0,0,0.9)]"
+>
   <article
     class="post-article flex flex-col w-full min-h-[250px] text-left bg-slate-900/40"
   >
@@ -28,7 +31,7 @@ const { post } = Astro.props;
         )
       }
       {
-        post.data.tags[0] && (
+        tagOn && post.data.tags[0] && (
           <span class="font-display text-xs uppercase tracking-[0.2em] bg-ink/70 text-stone border-[1px] py-1 px-3 md:py-2 md:px-5 border-stone-dim rounded-xs hover:text-white hover:border-mint transition-all duration-200">
             {post.data.tags[0]}
           </span>
@@ -50,11 +53,7 @@ const { post } = Astro.props;
       <div
         class="meta flex flex-wrap items-center gap-3 text-xs uppercase tracking-wide text-stone-dim font-display"
       >
-        {
-          post.data.author && (
-            <span class="author">{post.data.author}</span>
-          )
-        }
+        {post.data.author && <span class="author">{post.data.author}</span>}
         <span class="sep text-mint">&#9670;</span>
         <span>
           {

@@ -1,34 +1,117 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import PostCard from "../components/PostCard.astro";
+import { getCollection } from "astro:content";
 const { frontmatter } = Astro.props;
 
-type Props = CollectionEntry<'blog'>['data'];
+const { id, title, description, pubDate, updatedDate, heroImage, author, tags } =
+  Astro.props;
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const allPosts = await getCollection("blog");
+const suggestedPosts = allPosts
+  .filter((post) => post.id !== id && post.data.tags.some((tag) => tags.includes(tag)))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
 ---
 
-
-
 <Layout>
-		<main>
-			<article>
-				<div class="hero-image">
-				</div>
-				<div class="prose">
-					<div class="title">
-						<div class="date">
-							{
-								updatedDate && (
-									<div class="last-updated-on">
-									</div>
-								)
-							}
-						</div>
-						<h1>{title}</h1>
-						<hr />
-					</div>
-					<slot />
-				</div>
-			</article>
-		</main>
+  <main>
+    <article>
+      <div
+        class="starfield absolute inset-0 z-[10] overflow-hidden pointer-events-none opacity-70"
+        id="starfield"
+      >
+      </div>
+
+      <div
+        class="relative flex flex-row justify-center h-full w-full items-center pt-30 pb-10 font-sans text-center"
+      >
+        <div
+          class="text-white flex flex-col gap-5 w-4/5 items-center justify-start"
+        >
+          <header
+            class="flex flex-col items-center justify-start w-full md:w-5/6 gap-5"
+          >
+            <div class="featured-holder w-full">
+              <div
+                class="thumb relative min-h-[250px] md:min-h-[350px] bg-gradient-to-br from-medium-purple/60 via-slate-900/30 to-slate-950/90 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.12)] overflow-hidden"
+              >
+              </div>
+            </div>
+            <span
+              class="kicker font-display text-xs tracking-[0.3em] uppercase text-mint"
+              >OFFICIAL BLOG</span
+            >
+            <h1 class="font-display text-4xl md:text-6xl text-white">
+              {title}
+            </h1>
+            <span class="text-stone">{description}</span>
+            <div
+              class="meta flex flex-wrap items-center gap-3 text-xs uppercase tracking-wide text-stone-dim font-display"
+            >
+              {author && <span class="author">{author}</span>}
+              <span class="sep text-mint">&#9670;</span>
+              <span>
+                {
+                  pubDate.toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })
+                }
+              </span>
+            </div>
+          </header>
+          <div
+            id="content"
+            class="flex flex-col text-base indent-8 text-left gap-5"
+          >
+            <slot />
+          </div>
+          <ul class="flex flex-wrap gap-3 justify-center">
+            {
+              tags.map((tag) => (
+                <li>
+                  <a
+                    href={`/tags/${tag}`}
+                    class="font-display text-xs uppercase tracking-[0.2em] text-stone border-[1px] py-1 px-3 md:py-2 md:px-5 border-stone-dim rounded-xs hover:text-white hover:border-mint transition-all duration-200"
+                  >
+                    {tag}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </article>
+    {
+      suggestedPosts.length > 0 && (
+        <div class="suggested flex flex-col items-center justify-center gap-8 p-10">
+          <span class="kicker font-display text-xs tracking-[0.3em] uppercase text-mint text-center">
+            Keep Reading
+          </span>
+          <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full md:w-5/6">
+            {suggestedPosts.map((post) => (
+              <li>
+                <PostCard post={post} tagOn={false} />
+              </li>
+            ))}
+          </ul>
+        </div>
+      )
+    }
+  </main>
+  <script>
+    const firstP = document.querySelector("#content > p:nth-child(1)");
+    console.log(firstP);
+    console.log(firstP?.textContent);
+    firstP?.classList.add(
+      "first-letter:text-mint",
+      "first-letter:text-7xl",
+      "first-letter:font-display",
+      "first-letter:float-left",
+      "indent-0",
+    );
+  </script>
 </Layout>
