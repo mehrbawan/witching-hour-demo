@@ -1,0 +1,39 @@
+media:
+  input: public
+  output: /
+
+content:
+  - name: blog
+    label: Blog Posts
+    type: collection
+    path: src/content/blog
+    format: yaml-frontmatter
+    extension: md
+    view:
+      fields: [title, pubDate, tags]
+      primary: title
+    fields:
+      - name: title
+        type: string
+        required: true
+      - name: description
+        type: text
+        required: true
+      - name: author
+        type: string
+      - name: pubDate
+        label: Publish Date
+        type: date
+        required: true
+      - name: updatedDate
+        label: Updated Date
+        type: date
+      - name: heroImage
+        type: image
+      - name: tags
+        type: list
+        options:
+          values: ["dev log", "lore", "guides", "playtest"]
+      - name: body
+        label: Content
+        type: rich-text
