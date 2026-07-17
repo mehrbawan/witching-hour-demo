@@ -31,7 +31,7 @@ content:
       - name: heroImage
         type: image
       - name: tags
-        type: list
+        type: select
         options:
           values: ["dev log", "lore", "guides", "playtest"]
       - name: body
