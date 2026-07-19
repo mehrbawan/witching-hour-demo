@@ -39,10 +39,11 @@ import MainActionButton from "../components/MainActionButton.astro";
           ineunt umbrae - the streets remember what the daylight forgets.</span
         >
         <div class="hero-buttons flex flex-col md:flex-row gap-5">
-            <MainActionButton text={"Dive In"} />
-          <button
+            <MainActionButton text={"Dive In"} link={"/buy"} />
+          <a
             class="text-base bg-violet-500/10 border-1 border-violet-500/70 rounded-xs py-4 px-8 font-display uppercase tracking-[0.3em] text-white rounded-sm hover:border-violet-500 hover:bg-violet-500/20 transition-all duration-[250ms]"
-            >Read the Lore</button
+            href="/about"
+            >Read the Lore</a
           >
         </div>
       </div>
@@ -142,7 +143,7 @@ import MainActionButton from "../components/MainActionButton.astro";
               >→</span
             ></button
           > -->
-            <MainActionButton text={"Enter the Hour"} />
+            <MainActionButton text={"Enter the Hour"} link={""}/>
         </form>
 
         <span class="kicker font-display text-xs tracking-[0.3em] uppercase"

@@ -1,5 +1,4 @@
 ---
-import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 
 interface Props {
@@ -21,7 +20,7 @@ const { post, tagOn=true } = Astro.props;
     >
       {
         post.data.heroImage && (
-          <Image
+          <img
             width={480}
             height={360}
             src={post.data.heroImage}
@@ -39,14 +38,14 @@ const { post, tagOn=true } = Astro.props;
       }
     </div>
     <div class="post-body p-8 md:p-10 flex flex-col gap-4 justify-center">
-      <h2 class="font-display text-2xl md:text-3xl text-white">
+      <h3 class="font-display text-2xl md:text-3xl text-white">
         <a
           href={`/blog/${post.id}/`}
           class="hover:text-gold transition-colors duration-200"
         >
           {post.data.title}
         </a>
-      </h2>
+      </h3>
       <p class="text-stone text-sm md:text-base">
         {post.data.description}
       </p>

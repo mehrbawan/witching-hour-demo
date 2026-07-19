@@ -1,5 +1,4 @@
 ---
-import { Image } from "astro:assets";
 import Layout from "../../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 import PostCard from "../../components/PostCard.astro"
@@ -45,31 +44,33 @@ const featuredReadTime = Math.max(1, Math.round(featuredWords / 200));
             >Dev diaries, world lore, and field notes from the team behind the
             magic.</span
           >
+        </header>
 
           <!-- render tags -->
 
-          <ul class="flex flex-wrap gap-3 justify-center">
-            <li>
-              <span
-                class="font-display text-xs uppercase tracking-[0.2em] text-mint py-1 px-3 md:py-2 md:px-5 bg-mint text-slate-900 rounded-xs"
-              >
-                all
-              </span>
-            </li>
-            {
-              allTags.map((tag) => (
-                <li>
-                  <a
-                    href={`/tags/${tag}`}
-                    class="font-display text-xs uppercase tracking-[0.2em] text-stone border-[1px] py-1 px-3 md:py-2 md:px-5 border-stone-dim rounded-xs hover:text-white hover:border-mint transition-all duration-200"
-                  >
-                    {tag}
-                  </a>
-                </li>
-              ))
-            }
-          </ul>
-        </header>
+          <nav aria-label="Blog tags">
+            <ul class="flex flex-wrap gap-3 justify-center">
+              <li>
+                <span
+                  class="font-display text-xs uppercase tracking-[0.2em] text-mint py-1 px-3 md:py-2 md:px-5 bg-mint text-slate-900 rounded-xs"
+                >
+                  all
+                </span>
+              </li>
+              {
+                allTags.map((tag) => (
+                  <li>
+                    <a
+                      href={`/tags/${tag}`}
+                      class="font-display text-xs uppercase tracking-[0.2em] text-stone border-[1px] py-1 px-3 md:py-2 md:px-5 border-stone-dim rounded-xs hover:text-white hover:border-mint transition-all duration-200"
+                    >
+                      {tag}
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </nav>
 
         <!-- featured post component  -->
 
@@ -79,11 +80,12 @@ const featuredReadTime = Math.max(1, Math.round(featuredWords / 200));
               <article class="featured-article grid grid-cols-1 md:grid-cols-[1.15fr_1fr] w-full text-left rounded-lg overflow-hidden shadow-[inset_0_0_0_1px_rgba(127,230,176,0.18),0_30px_70px_-34px_rgba(0,0,0,0.9)] bg-gradient-to-b from-slate-800/60 to-slate-900/60">
                 <div class="thumb relative min-h-[280px] md:min-h-[420px] bg-gradient-to-br from-medium-purple/60 via-slate-900/30 to-slate-950/90 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.12)] overflow-hidden">
                   {featured.data.heroImage && (
-                    <Image
+                    <img
                       width={480}
                       height={360}
                       src={featured.data.heroImage}
-                      alt=""
+                      alt="Witching Hour Wordmark"
+                      fetchpriority="high"
                       class="absolute inset-0 w-full h-full object-cover"
                     />
                   )}
@@ -100,14 +102,14 @@ const featuredReadTime = Math.max(1, Math.round(featuredWords / 200));
                   <p class="featured-kicker font-display text-xs uppercase tracking-[0.3em] text-mint">
                     Featured
                   </p>
-                  <h2 class="font-display text-2xl md:text-4xl text-cream">
+                  <h3 class="font-display text-2xl md:text-4xl text-cream">
                     <a
                       href={`/blog/${featured.id}/`}
                       class="hover:text-mint transition-colors duration-200"
                     >
                       {featured.data.title}
                     </a>
-                  </h2>
+                  </h3>
                   <p class="text-stone text-sm md:text-base">
                     {featured.data.description}
                   </p>
@@ -132,9 +134,9 @@ const featuredReadTime = Math.max(1, Math.round(featuredWords / 200));
           )
         }
 
-          <span
+          <h2
             class="kicker font-display text-xs tracking-[0.3em] uppercase text-mint p-10 pt-20"
-            >Latest Posts</span
+            >Latest Posts</h2
           >
         <!-- recent posts cards -->
         <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
@@ -146,9 +148,7 @@ const featuredReadTime = Math.max(1, Math.round(featuredWords / 200));
             ))
           }
         </ul>
-<a href="/blog/1">
-  <MainActionButton text={"See All Posts"} />
-</a>
+  <MainActionButton text={"See All Posts"} link={"/blog/1"}/>
       </div>
     </div>
   </main>

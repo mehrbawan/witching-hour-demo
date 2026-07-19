@@ -26,6 +26,11 @@
   }
 }
 
+.body
+{
+  margin:0;
+}
+
 .star {
   position: absolute;
   border-radius: 50%;
