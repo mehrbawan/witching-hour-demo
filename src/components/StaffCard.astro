@@ -1,0 +1,23 @@
+---
+
+const { name, role, bio } = Astro.props;
+
+---
+
+
+<div
+  class="border-1 border-stone-dim flex flex-row md:flex-col items-center justify-center gap-3 text-center rounded-[7px] py-2 px-2 md:px-8 md:py-15 z-10 bg-linear-to-b from-slate-900 from-5% to-slate-800 to-90% shadow-[0_12px_39px_-15px_rgba(0,0,0,1)]"
+>
+  <img
+    src="/mage_transparent.png"
+    class="w-24 h-24 object-cover rounded-full border-1 border-stone-dim"
+    alt=""
+  />
+  <div class="details flex flex-col md:gap-2">
+    <h3 class="font-display text-lg text-cream">{name}</h3>
+    <span class="font-display text-xs tracking-[0.2em] uppercase text-mint"
+      >{role}</span
+    >
+    <p class="text-stone text-sm">{bio}</p>
+  </div>
+</div>
